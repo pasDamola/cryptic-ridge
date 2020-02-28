@@ -136,7 +136,7 @@ class AccountController < ApplicationController
         tweetBody = !params['tweetBody'].nil? ? ((params['tweetBody'].present? and !params['tweetBody'].empty?) ? params['tweetBody'] : "") : ""
         tweet.tweetinfo = tweetBody
         tweet.users_record_id = user.id
-        tweet.userid = user.userId
+        tweet.userid = user.userid
         if params[:tweetAttachments]
             tweet.tweetAttachments.attach(params[:tweetAttachments])
         end
@@ -152,9 +152,9 @@ class AccountController < ApplicationController
         recPerPage = 20
         recOffset = (current_page - 1) * recPerPage
         tweetAll = []
-        following= Following.where("userId =:userId",{userId:getUserId[0]['userId']})
-        sam = following.to_a.map{|p| p.followingId}.push(getUserId[0]['userId'])
-        tweets = Tweet.where('userId IN (?)', sam).limit(recPerPage).offset(recOffset).order(id: :desc)
+        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']})
+        MineAndFollowingUserId = following.to_a.map{|p| p.followingid}.push(getUserId[0]['userId'])
+        tweets = Tweet.where('userid IN (?)', MineAndFollowingUserId).limit(recPerPage).offset(recOffset).order(id: :desc)
         tweets.each do |singleTweet|
             eachTweet ={}
             eachTweet[:tweet] = singleTweet
@@ -163,8 +163,8 @@ class AccountController < ApplicationController
                 tweetAttachs.push(url_for(tweetFile))
             end
             eachTweet[:tweetAttachs] = tweetAttachs.as_json
-            eachTweet[:userFullName] = singleTweet.users_record.userFullName
-            eachTweet[:userName] = singleTweet.users_record.userName
+            eachTweet[:userFullName] = singleTweet.users_record.userfullname
+            eachTweet[:userName] = singleTweet.users_record.username
             tweetAll.push(eachTweet)
         end
         render json: tweetAll.as_json, status: :ok

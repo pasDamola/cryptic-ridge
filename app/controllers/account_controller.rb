@@ -41,9 +41,9 @@ class AccountController < ApplicationController
     #################################################################################
     def CreateFollowing
         myFollowId = params['followingId']
-        myFollowRecord = UsersRecord.find_by("userId =:userId",{userId:myFollowId})
+        myFollowRecord = UsersRecord.find_by("userid =:userId",{userId:myFollowId})
         if myFollowRecord
-            if Following.where("userId= :userId and followingId= :followingId",{userId:getUserId[0]['userId'],followingId:myFollowId })
+            if Following.where("userid= :userId and followingid= :followingId",{userId:getUserId[0]['userId'],followingId:myFollowId })
             .first_or_create(
                 followingId:myFollowId,
                 userId:getUserId[0]['userId'],
@@ -59,7 +59,7 @@ class AccountController < ApplicationController
     end
     # people wey u dey follow
     def Listfollowing
-        following= Following.where("userId =:userId",{userId:getUserId[0]['userId']})
+        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']})
         render json: {following:following}, status: :ok
     end
     # people wey they follow you

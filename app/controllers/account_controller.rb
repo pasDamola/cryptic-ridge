@@ -94,7 +94,7 @@ class AccountController < ApplicationController
         render json: showUser.as_json, status: :ok
     end
     def updateProfile
-        user = UsersRecord.find_by_userId(getUserId[0]['userId'])
+        user = UsersRecord.find_by_userid(getUserId[0]['userId'])
         userPhone = !params['userPhone'].nil? ? ((params['userPhone'].present? and !params['userPhone'].empty?) ? params['userPhone'] : user.userphone) : user.userphone
         userBio = !params['userBio'].nil? ? ((params['userBio'].present? and !params['userBio'].empty?) ? params['userBio'] : user.userbio) : user.userbio
         userLocation = !params['userLocation'].nil? ? ((params['userLocation'].present? and !params['userLocation'].empty?) ? params['userLocation'] : user.userlocation): user.userlocation

@@ -27,7 +27,7 @@ class AccountController < ApplicationController
         user = UsersRecord.where("username = :userName or useremail = :userEmail", { userName: userNameChange.downcase, userEmail: userName }).limit(1)
         if user.count ==1 and user[0].authenticate(password)
             #generate web token
-            webToken = GenerateLoginToken user[0].userId, user[0].id
+            webToken = GenerateLoginToken user[0].userid, user[0].id
             render json: {authentication:webToken, user:user}, status: :ok
         else
             render json: {status:"error", code:404, message:"User Not Exist"}, status: :not_found

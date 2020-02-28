@@ -153,8 +153,8 @@ class AccountController < ApplicationController
         recOffset = (current_page - 1) * recPerPage
         tweetAll = []
         following= Following.where("userid =:userId",{userId:getUserId[0]['userId']})
-        MineAndFollowingUserId = following.to_a.map{|p| p.followingid}.push(getUserId[0]['userId'])
-        tweets = Tweet.where('userid IN (?)', MineAndFollowingUserId).limit(recPerPage).offset(recOffset).order(id: :desc)
+        sam = following.to_a.map{|p| p.followingid}.push(getUserId[0]['userId'])
+        tweets = Tweet.where('userid IN (?)', sam).limit(recPerPage).offset(recOffset).order(id: :desc)
         tweets.each do |singleTweet|
             eachTweet ={}
             eachTweet[:tweet] = singleTweet

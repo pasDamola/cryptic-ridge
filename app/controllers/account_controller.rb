@@ -45,8 +45,8 @@ class AccountController < ApplicationController
         if myFollowRecord
             if Following.where("userid= :userId and followingid= :followingId",{userId:getUserId[0]['userId'],followingId:myFollowId })
             .first_or_create(
-                followingId:myFollowId,
-                userId:getUserId[0]['userId'],
+                followingid:myFollowId,
+                userid:getUserId[0]['userId'],
                 users_record_id:getUserId[0]['rec_id']
             )
                 render json: {message:"Following"}, status: :ok

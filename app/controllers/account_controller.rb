@@ -5,7 +5,7 @@ class AccountController < ApplicationController
         if VerifyValidUserName(userName)
             userName = userName[0] == "@" ? userName:"@".concat(userName)
             user =  UsersRecord.new
-            user.username = userName.downcase
+            user.username = userName
             user.userfullname = params['userFullName']
             user.useremail = params['userEmail']
             user.password = params['password']

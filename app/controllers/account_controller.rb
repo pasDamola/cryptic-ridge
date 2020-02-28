@@ -95,20 +95,20 @@ class AccountController < ApplicationController
     end
     def updateProfile
         user = UsersRecord.find_by_userId(getUserId[0]['userId'])
-        userPhone = !params['userPhone'].nil? ? ((params['userPhone'].present? and !params['userPhone'].empty?) ? params['userPhone'] : user.userPhone) : user.userPhone
-        userBio = !params['userBio'].nil? ? ((params['userBio'].present? and !params['userBio'].empty?) ? params['userBio'] : user.userBio) : user.userBio
-        userLocation = !params['userLocation'].nil? ? ((params['userLocation'].present? and !params['userLocation'].empty?) ? params['userLocation'] : user.userLocation): user.userLocation
-        userWebsite = !params['userWebsite'].nil? ? ((params['userWebsite'].present? and !params['userWebsite'].empty?)  ? params['userWebsite'] : user.userWebsite) : user.userWebsite
-        userEmail = !params['userEmail'].nil? ? ((params['userEmail'].present? and !params['userEmail'].empty?) ? params['userEmail'] : user.userEmail): user.userEmail
-        userFullName = !params['userFullName'].nil? ? ((params['userFullName'].present? and !params['userFullName'].empty?) ? params['userFullName'] : user.userFullName) : user.userFullName
+        userPhone = !params['userPhone'].nil? ? ((params['userPhone'].present? and !params['userPhone'].empty?) ? params['userPhone'] : user.userphone) : user.userphone
+        userBio = !params['userBio'].nil? ? ((params['userBio'].present? and !params['userBio'].empty?) ? params['userBio'] : user.userbio) : user.userbio
+        userLocation = !params['userLocation'].nil? ? ((params['userLocation'].present? and !params['userLocation'].empty?) ? params['userLocation'] : user.userlocation): user.userlocation
+        userWebsite = !params['userWebsite'].nil? ? ((params['userWebsite'].present? and !params['userWebsite'].empty?)  ? params['userWebsite'] : user.userwebsite) : user.userwebsite
+        userEmail = !params['userEmail'].nil? ? ((params['userEmail'].present? and !params['userEmail'].empty?) ? params['userEmail'] : user.userEmail): user.useremail
+        userFullName = !params['userFullName'].nil? ? ((params['userFullName'].present? and !params['userFullName'].empty?) ? params['userFullName'] : user.userfullname) : user.userfullname
         dob = !params['dob'].nil? ? ((params['dob'].present? and !params['dob'].empty?) ? params['dob'] : user.dob): user.dob
         
-        user.update_attribute(:userPhone, userPhone)
-        user.update_attribute(:userBio, userBio)
-        user.update_attribute(:userLocation, userLocation)
-        user.update_attribute(:userWebsite, userWebsite)
-        user.update_attribute(:userEmail, userEmail)
-        user.update_attribute(:userFullName, userFullName)
+        user.update_attribute(:userphone, userPhone)
+        user.update_attribute(:userbio, userBio)
+        user.update_attribute(:userlocation, userLocation)
+        user.update_attribute(:userwebsite, userWebsite)
+        user.update_attribute(:useremail, userEmail)
+        user.update_attribute(:userfullname, userFullName)
         user.update_attribute(:dob, dob)
         # upload display pics
         if params[:dp]

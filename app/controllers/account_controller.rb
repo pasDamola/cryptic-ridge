@@ -142,7 +142,8 @@ class AccountController < ApplicationController
         end
         
         if tweet.save
-            render json: Tweet.all.as_json, status: :ok
+            # render json: Tweet.all.as_json, status: :ok
+            render json: {message:"tweeted"}, status: :ok
         else
             render json: {status:"error", code:422, message:"Failed to Update"}, status: :unprocessable_entity
         end

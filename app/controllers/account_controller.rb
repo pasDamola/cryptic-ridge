@@ -87,8 +87,8 @@ class AccountController < ApplicationController
     def viewProfile
         user = UsersRecord.find_by_userid(getUserId[0]['userId'])
         showUser = user.as_json
-        showUser[:dp] = url_for(user.dp) 
-        showUser[:coverPhoto] = url_for(user.coverPhoto)
+        showUser[:dp] = (user.dp.attached?) ? url_for(user.dp) : ""
+        showUser[:coverPhoto] = (user.coverPhoto.attached?) ? url_for(user.dp) : ""
         showUser[:followings] = user.followings.count
         showUser[:followers] = Following.where("followingId =:followingId",{followingId:getUserId[0]['userId']}).count
         render json: showUser.as_json, status: :ok

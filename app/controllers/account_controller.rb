@@ -28,7 +28,8 @@ class AccountController < ApplicationController
         if user.count ==1 and user[0].authenticate(password)
             #generate web token
             # webToken = GenerateLoginToken user[0].userid, user[0].id
-            print (user[0])
+            print (user[0].to_h)
+            print (user[0].userid)
             # render json: {authentication:webToken, user:user}, status: :ok
             render json: {user:user}, status: :ok
         else

@@ -72,7 +72,7 @@ class AccountController < ApplicationController
         followOther = params['followingId']
         Following.delete_by(userid: getUserId[0]['userId'], followingid: followOther)
         following= Following.where("userid =:userId",{userId:getUserId[0]['userId']}).count
-        render json: {following:following.count, message:"unfollowed"}, status: :ok
+        render json: {following:following, message:"unfollowed"}, status: :ok
     end
 
     #################################################################################

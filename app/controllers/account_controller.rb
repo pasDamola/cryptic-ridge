@@ -88,7 +88,7 @@ class AccountController < ApplicationController
         user = UsersRecord.find_by_userid(getUserId[0]['userId'])
         showUser = user.as_json
         showUser[:dp] = (user.dp.attached?) ? url_for(user.dp) : ""
-        showUser[:coverPhoto] = (user.coverPhoto.attached?) ? url_for(user.dp) : ""
+        showUser[:coverPhoto] = (user.coverPhoto.attached?) ? url_for(user.coverPhoto) : ""
         showUser[:followings] = user.followings.count
         showUser[:followers] = Following.where("followingId =:followingId",{followingId:getUserId[0]['userId']}).count
         render json: showUser.as_json, status: :ok
@@ -121,7 +121,7 @@ class AccountController < ApplicationController
         render json: {updated:"Updated"}, status: :ok
     end
     def updatePassword
-        user = UsersRecord.find_by_userId(getUserId[0]['userId'])
+        user = UsersRecord.find_by_userid(getUserId[0]['userId'])
         if user and user.authenticate(params['userOldPassword'])
             user.update_attribute(:password, params['userNewPassword'])
             render json: {updated:"Updated"}, status: :ok

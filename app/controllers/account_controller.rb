@@ -132,12 +132,11 @@ class AccountController < ApplicationController
     end
     def CreateTweet
         tweet = Tweet.new
-        user = UsersRecord.find_by_userId(getUserId[0]['userId'])
+        user = UsersRecord.find_by_userid(getUserId[0]['userId'])
         tweetBody = !params['tweetBody'].nil? ? ((params['tweetBody'].present? and !params['tweetBody'].empty?) ? params['tweetBody'] : "") : ""
-        p tweetBody
-        tweet.tweetInfo = tweetBody
+        tweet.tweetinfo = tweetBody
         tweet.users_record_id = user.id
-        tweet.userId = user.userId
+        tweet.userid = user.userId
         if params[:tweetAttachments]
             tweet.tweetAttachments.attach(params[:tweetAttachments])
         end

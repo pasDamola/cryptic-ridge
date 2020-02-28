@@ -177,15 +177,10 @@ class AccountController < ApplicationController
         userNameChange = userName[0] == "@" ? userName:"@".concat(userName)
         user = UsersRecord.where("username =:userName or useremail =:userEmail or userphone =:userPhone", { userName: userNameChange, userEmail: userName , userPhone: userName }).limit(1)
         if user.count ==1
-        #     #process Maills
-        #     resetToken = GenerateResetToken user[0].userid, user[0].useremail
-        #     # PasswordResetMailer.with(user:user[0].useremail, reset:resetToken).resetPasswordEmail.deliver_now
-        #     # PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).resetPasswordEmail.deliver_now
             render json: {message:"Maill Sent"}, status: :ok
         else
             render json: {status:"error", code:404, message:"User Not Exist"}, status: :not_found
         end
-        render json: {message:"Maill Sent"}, status: :ok
     end
 
     def UpdateResetPassword
@@ -195,7 +190,7 @@ class AccountController < ApplicationController
         { userName: userNameChange, userEmail: userName , userPhone: userName }).limit(1)
         if user.count ==1
             #process Maills
-            resetToken = GenerateResetToken user[0].userid, user[0].useremail
+            # resetToken = GenerateResetToken user[0].userid, user[0].useremail
             # PasswordResetMailer.with(user:user[0].useremail, reset:resetToken).resetPasswordEmail.deliver_now
             # PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).resetPasswordEmail.deliver_now
             render json: {message:"Maill Sent", email:user.useremail}, status: :ok

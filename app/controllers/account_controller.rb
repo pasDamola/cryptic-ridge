@@ -5,11 +5,11 @@ class AccountController < ApplicationController
         if VerifyValidUserName(userName)
             userName = userName[0] == "@" ? userName:"@".concat(userName)
             user =  UsersRecord.new
-            user.userName = userName.downcase
-            user.userFullName = params['userFullName']
-            user.userEmail = params['userEmail']
+            user.username = userName.downcase
+            user.userfullname = params['userFullName']
+            user.useremail = params['userEmail']
             user.password = params['password']
-            user.userId = rand(10000000...90000000)
+            user.userid = rand(10000000...90000000)
             if user.save
                 render json: user.as_json, status: :created
             else
@@ -24,7 +24,7 @@ class AccountController < ApplicationController
         userName = params['userName']
         password = params['password']
         userNameChange = userName[0] == "@" ? userName:"@".concat(userName)
-        user = UsersRecord.where("userName = :userName or userEmail = :userEmail", { userName: userNameChange.downcase, userEmail: userName }).limit(1)
+        user = UsersRecord.where("username = :userName or useremail = :userEmail", { userName: userNameChange.downcase, userEmail: userName }).limit(1)
         if user.count ==1 and user[0].authenticate(password)
             #generate web token
             webToken = GenerateLoginToken user[0].userId, user[0].id

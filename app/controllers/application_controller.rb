@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
         if auth_header
             authentication = auth_header.split(' ')[1]
             begin
-                @s = JWT.decode(authentication, Rails.application.secrets.secret_key_base, true, algorithm: 'HS512')
+                @s = JWT.decode(authentication, 'sheriffoyindaq', true, algorithm: 'HS512')
             rescue JWT::DecodeError
                 render json: {status:"error", code:401, message:"Authentication Failed"}, status: :unauthorized
             end
@@ -21,10 +21,9 @@ class ApplicationController < ActionController::API
         @s
     end
     def GenerateLoginToken user, rec_id
-        puts Rails.application.secrets.secret_key_base
         JWT.encode(
                 {userId:user, rec_id:rec_id}, 
-                Rails.application.secrets.secret_key_base, 
+                'sheriffoyindaq', 
                 'HS512'
             )
     end

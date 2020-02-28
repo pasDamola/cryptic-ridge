@@ -49,7 +49,8 @@ class AccountController < ApplicationController
                 userid:getUserId[0]['userId'],
                 users_record_id:getUserId[0]['rec_id']
             )
-                render json: {message:"Following"}, status: :ok
+                following= Following.where("userid =:userId",{userId:getUserId[0]['userId']}).count
+                render json: {following:following, message:"Following"}, status: :ok
             else
                 render json: {status:"error", code:422, message:"Failed to Follow"}, status: :unprocessable_entity
             end
@@ -59,19 +60,19 @@ class AccountController < ApplicationController
     end
     # people wey u dey follow
     def Listfollowing
-        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']})
+        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']}).count
         render json: {following:following}, status: :ok
     end
     # people wey they follow you
     def Listfollowers
-        follower= Following.where("followingid =:followingId",{followingId:getUserId[0]['userId']})
+        follower= Following.where("followingid =:followingId",{followingId:getUserId[0]['userId']}).count
         render json: {info:getUserId[0]['userId'], follower:follower}, status: :ok
     end
     def unfollowing
         followOther = params['followingId']
         Following.delete_by(userid: getUserId[0]['userId'], followingid: followOther)
-        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']})
-        render json: {following:following}, status: :ok
+        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']}).count
+        render json: {following:following.count, message="unfollowed"}, status: :ok
     end
 
     #################################################################################

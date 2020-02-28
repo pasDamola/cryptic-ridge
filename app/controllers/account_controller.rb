@@ -166,6 +166,7 @@ class AccountController < ApplicationController
             eachTweet[:tweetAttachs] = tweetAttachs.as_json
             eachTweet[:userFullName] = singleTweet.users_record.userfullname
             eachTweet[:userName] = singleTweet.users_record.username
+            eachTweet[:dp] = (singleTweet.users_record.dp.attached?) ? url_for(singleTweet.users_record.dp) : ""
             tweetAll.push(eachTweet)
         end
         render json: tweetAll.as_json, status: :ok

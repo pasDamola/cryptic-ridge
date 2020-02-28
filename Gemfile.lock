@@ -91,9 +91,12 @@ GEM
     nokogiri (1.10.8-x86-mingw32)
       mini_portile2 (~> 2.4.0)
     pg (1.2.2-x64-mingw32)
+    pg (1.2.2-x86-mingw32)
     puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.2.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.2.1)
@@ -159,6 +162,7 @@ DEPENDENCIES
   jwt
   pg
   puma (~> 4.1)
+  rack-cors
   rails (~> 6.0.2, >= 6.0.2.1)
   rails_12factor
   sqlite3 (~> 1.4)

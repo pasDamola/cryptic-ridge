@@ -20,9 +20,16 @@ class ApplicationController < ActionController::API
     def getUserId
         @s
     end
-    def GenerateLoginToken user, rec_id
+    def GenerateLoginToken userid, rec_id
         JWT.encode(
-                {userId:user, rec_id:rec_id}, 
+                {userId:userid, rec_id:rec_id}, 
+                'sheriffoyindaq', 
+                'HS512'
+            )
+    end
+    def GenerateResetToken userid, useremail
+        JWT.encode(
+                {userId:userid, userEmail:useremail}, 
                 'sheriffoyindaq', 
                 'HS512'
             )

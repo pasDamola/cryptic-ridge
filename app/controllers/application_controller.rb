@@ -22,6 +22,7 @@ class ApplicationController < ActionController::API
     end
     def GenerateLoginToken user, rec_id
         puts user
+        puts rec_id
         JWT.encode(
                 {userId:user, rec_id:rec_id}, 
                 Rails.application.secrets.secret_key_base, 

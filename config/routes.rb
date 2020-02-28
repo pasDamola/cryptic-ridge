@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   post '/create', :to=> 'account#CreateUser', as: 'create'
   post '/login', :to=> 'account#LoginUser', as: 'LoginUser'
-  get '/follow', :to=> 'account#Listfollowing', as: 'follow'
   get '/CreateFollow', :to=> 'account#CreateFollowing', as: 'CreateFollow' 
-  get '/follower', :to=> 'account#Listfollowers', as: 'follower'
-  get '/CreateFollower', :to=> 'account#CreateFollowers', as: 'CreateFollower'
-  get '/UsernameExist', :to=> 'account#existingUserName', as: 'UsernameExist'
+  get '/follow', :to=> 'account#Listfollowing', as: 'follow'
+  get '/unfollow', :to=> 'account#unfollowing', as: 'unfollow'
+  get '/usernameList', :to=> 'account#existingUserName', as: 'usernameList'
   get '/viewProfile', :to=> 'account#viewProfile', as: 'viewProfile'
   get '/updateProfile', :to=> 'account#updateProfile', as: 'updateProfile'
-
-  get '/removeFollower', :to=> 'account#unfollowers', as: 'removeFollower'
+  get '/updatePassword', :to=> 'account#updatePassword', as: 'updatePassword'
   get '/removeFollow', :to=> 'account#unfollowing', as: 'removeFollow'
+
+  post '/tweet', :to=> 'account#CreateTweet', as: 'tweet'
+  get '/viewTweet', :to=> 'account#loadTweets', as: 'viewTweet'
 end

@@ -1,4 +1,5 @@
 class Tweet < ApplicationRecord
-    belongs_to :user_record
-    validates :tweetInfo,:userId, presence: true, on: :create
+    belongs_to :users_record
+    has_many_attached :tweetAttachments
+    validates :userId, presence: true, on: :create
 end

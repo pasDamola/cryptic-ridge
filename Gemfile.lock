@@ -84,8 +84,11 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.0)
     msgpack (1.3.3-x64-mingw32)
+    msgpack (1.3.3-x86-mingw32)
     nio4r (2.5.2)
     nokogiri (1.10.8-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.8-x86-mingw32)
       mini_portile2 (~> 2.4.0)
     puma (4.3.1)
       nio4r (~> 2.0)
@@ -140,6 +143,7 @@ GEM
 
 PLATFORMS
   x64-mingw32
+  x86-mingw32
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)

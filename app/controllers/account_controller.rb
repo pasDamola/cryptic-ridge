@@ -179,7 +179,7 @@ class AccountController < ApplicationController
         if user.count ==1
         #     #process Maills
             resetToken = GenerateResetToken user[0].userid, user[0].useremail
-            PasswordResetMailer.with(user:user[0].useremail, reset:resetToken).resetPasswordEmail.deliver_now
+            # PasswordResetMailer.with(user:user[0].useremail, reset:resetToken).resetPasswordEmail.deliver_now
         #     # PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).resetPasswordEmail.deliver_now
             render json: {message:"Maill Sent"}, status: :ok
         else

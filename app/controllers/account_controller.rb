@@ -64,13 +64,13 @@ class AccountController < ApplicationController
     end
     # people wey they follow you
     def Listfollowers
-        follower= Following.where("followingId =:followingId",{followingId:getUserId[0]['userId']})
+        follower= Following.where("followingid =:followingId",{followingId:getUserId[0]['userId']})
         render json: {info:getUserId[0]['userId'], follower:follower}, status: :ok
     end
     def unfollowing
         followOther = params['followingId']
-        Following.delete_by(userId: getUserId[0]['userId'], followingId: followOther)
-        following= Following.where("userId =:userId",{userId:getUserId[0]['userId']})
+        Following.delete_by(userid: getUserId[0]['userId'], followingid: followOther)
+        following= Following.where("userid =:userId",{userId:getUserId[0]['userId']})
         render json: {following:following}, status: :ok
     end
 

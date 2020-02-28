@@ -180,7 +180,8 @@ class AccountController < ApplicationController
         if user.count ==1
             #process Maills
             resetToken = GenerateResetToken user[0].userid, user[0].useremail
-            PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).welcome_email.deliver_now
+            # PasswordResetMailer.resetPasswordEmail(user:user[0].useremail, reset:resetToken).welcome_email.deliver_now
+            PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).resetPasswordEmail.deliver_now
             render json: {message:"Maill Sent", email:user.useremail}, status: :ok
         else
             render json: {status:"error", code:404, message:"User Not Exist"}, status: :not_found

@@ -24,7 +24,7 @@ class AccountController < ApplicationController
         userName = params['userName']
         password = params['password']
         userNameChange = userName[0] == "@" ? userName:"@".concat(userName)
-        user = UsersRecord.where("username = :userName or useremail = :userEmail", { userName: userNameChange.downcase, userEmail: userName }).limit(1)
+        user = UsersRecord.where("username = :userName or useremail = :userEmail", { userName: userNameChange, userEmail: userName }).limit(1)
         if user.count ==1 and user[0].authenticate(password)
             #generate web token
             webToken = GenerateLoginToken user[0].userid, user[0].id

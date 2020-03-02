@@ -90,6 +90,7 @@ class AccountController < ApplicationController
             eachrecord={}
             eachrecord[:username] = rec.username
             eachrecord[:userfullname] = rec.userfullname
+            eachrecord[:userid] = rec.userid
             eachrecord[:dp] = (rec.dp.attached?) ? url_for(rec.dp) : ""
             allRecord.push(eachrecord)
         end

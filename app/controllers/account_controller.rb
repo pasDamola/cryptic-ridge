@@ -83,7 +83,7 @@ class AccountController < ApplicationController
     #################################################################################
     def existingUserName
         user = UsersRecord.all
-        render json: user.as_json(only:[:username]), status: :ok
+        render json: user.as_json(only:[:username, :userfullName, :dp]), status: :ok
     end
     def viewProfile
         user = UsersRecord.find_by_userid(getUserId[0]['userId'])

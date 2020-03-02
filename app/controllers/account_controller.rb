@@ -84,7 +84,7 @@ class AccountController < ApplicationController
     def existingUserName
         userName = params['userName']
         userName = userName[0] == "@" ? userName:"@".concat(userName)
-        user = UsersRecord.where("username like %#{userName}%")
+        user = UsersRecord.where("username like '%#{userName}%' ")
         allRecord = []
         user.each do |rec|
             eachrecord={}

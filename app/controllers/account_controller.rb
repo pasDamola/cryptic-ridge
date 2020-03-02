@@ -187,24 +187,24 @@ class AccountController < ApplicationController
         end
     end
 
-    def UpdateResetPassword
-        resetToken = params['resetToken']
-        verifyPasswordResetToken(resetToken)
+    # def UpdateResetPassword
+    #     resetToken = params['resetToken']
+    #     verifyPasswordResetToken(resetToken)
         
-        userNameChange = userName[0] == "@" ? userName:"@".concat(userName)
-        user = UsersRecord.where("username = :userName or useremail = :userEmail or userphone= :userPhone", 
-        { userName: userNameChange, userEmail: userName , userPhone: userName }).limit(1)
-        if user.count ==1
-            #process Maills
-            # resetToken = GenerateResetToken user[0].userid, user[0].useremail
-            # PasswordResetMailer.with(user:user[0].useremail, reset:resetToken).resetPasswordEmail.deliver_now
-            # PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).resetPasswordEmail.deliver_now
-            render json: {message:"Maill Sent", email:user.useremail}, status: :ok
-        else
-            render json: {status:"error", code:404, message:"User Not Exist"}, status: :not_found
-        end
-    end
-    private def post_user_params
-        params.require(:UsersRecord).permit(:userEmail, :userName, :userFullName)
-    end
+    #     userNameChange = userName[0] == "@" ? userName:"@".concat(userName)
+    #     user = UsersRecord.where("username = :userName or useremail = :userEmail or userphone= :userPhone", 
+    #     { userName: userNameChange, userEmail: userName , userPhone: userName }).limit(1)
+    #     if user.count ==1
+    #         #process Maills
+    #         # resetToken = GenerateResetToken user[0].userid, user[0].useremail
+    #         # PasswordResetMailer.with(user:user[0].useremail, reset:resetToken).resetPasswordEmail.deliver_now
+    #         # PasswordResetMailer.with({user:user[0].useremail, reset:resetToken}).resetPasswordEmail.deliver_now
+    #         render json: {message:"Maill Sent", email:user.useremail}, status: :ok
+    #     else
+    #         render json: {status:"error", code:404, message:"User Not Exist"}, status: :not_found
+    #     end
+    # end
+    # private def post_user_params
+    #     params.require(:UsersRecord).permit(:userEmail, :userName, :userFullName)
+    # end
 end

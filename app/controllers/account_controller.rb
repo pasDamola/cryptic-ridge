@@ -91,7 +91,7 @@ class AccountController < ApplicationController
             eachrecord[:username] = rec.username
             eachrecord[:userfullname] = rec.userfullname
             eachrecord[:dp] = (rec.dp.attached?) ? url_for(rec.dp) : ""
-            allRecord.push(eachTweet)
+            allRecord.push(eachrecord)
         end
         render json: allRecord.as_json, status: :ok
     end

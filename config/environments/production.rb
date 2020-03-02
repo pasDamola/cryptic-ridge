@@ -110,7 +110,7 @@ Rails.application.configure do
     authentication:"plain",
     enable_starttls_auto: true,
     user_name: "aabdulraheemsherif@gmail.com",
-    password: "onize2019"
+    password: ""
   }
   config.action_mailer.default_url_options = {host: "https://cryptic-ridge-07009.herokuapp.com"}
 end

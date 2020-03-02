@@ -82,8 +82,18 @@ class AccountController < ApplicationController
     # - all update on user profile                                                  #
     #################################################################################
     def existingUserName
-        user = UsersRecord.all
-        render json: user.as_json(only:[:username, :userfullName, :dp]), status: :ok
+        userName = params['userName']
+        userName = userName[0] == "@" ? userName:"@".concat(userName)
+        user = UsersRecord.where("username like %#{userName}%")
+        allRecord = []
+        user.each do |rec|
+            eachrecord={}
+            eachrecord[:username] = rec.username
+            eachrecord[:userfullname] = rec.userfullname
+            eachrecord[:dp] = (rec.dp.attached?) ? url_for(rec.dp) : ""
+            allRecord.push(eachTweet)
+        end
+        render json: allRecord.as_json, status: :ok
     end
     def viewProfile
         user = UsersRecord.find_by_userid(getUserId[0]['userId'])

@@ -188,7 +188,9 @@ class AccountController < ApplicationController
     end
 
     def UpdateResetPassword
-        userName = params['userName']
+        resetToken = params['resetToken']
+        verifyPasswordResetToken(resetToken)
+        
         userNameChange = userName[0] == "@" ? userName:"@".concat(userName)
         user = UsersRecord.where("username = :userName or useremail = :userEmail or userphone= :userPhone", 
         { userName: userNameChange, userEmail: userName , userPhone: userName }).limit(1)

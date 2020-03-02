@@ -17,6 +17,13 @@ class ApplicationController < ActionController::API
             render json: {status:"error", code:401, message:"Authentication Failed"}, status: :unauthorized
         end
     end
+    def verifyPasswordResetToken resetToken
+        begin
+            @s = JWT.decode(resetToken, 'sheriffoyindaq', true, algorithm: 'HS512')
+        rescue JWT::DecodeError
+            @s =""
+        end
+    end
     def getUserId
         @s
     end
@@ -29,7 +36,7 @@ class ApplicationController < ActionController::API
     end
     def GenerateResetToken userid, useremail
         JWT.encode(
-                {userId:userid, userEmail:useremail}, 
+                {userId:userid}, 
                 'sheriffoyindaq', 
                 'HS512'
             )

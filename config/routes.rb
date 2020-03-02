@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/unfollow', :to=> 'account#unfollowing', as: 'unfollow'
   get '/usernameList', :to=> 'account#existingUserName', as: 'usernameList'
   get '/viewProfile', :to=> 'account#viewProfile', as: 'viewProfile'
-  get '/updateProfile', :to=> 'account#updateProfile', as: 'updateProfile'
+  put '/updateProfile', :to=> 'account#updateProfile', as: 'updateProfile'
   get '/updatePassword', :to=> 'account#updatePassword', as: 'updatePassword'
   get '/removeFollow', :to=> 'account#unfollowing', as: 'removeFollow'
   get '/viewTweet', :to=> 'account#loadTweets', as: 'viewTweet'

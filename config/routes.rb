@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/viewTweet', :to=> 'account#loadTweets', as: 'viewTweet'
   get '/allUsers', :to=> 'account#listAllUsers', as: 'allUsers'
   get '/likeTweet', :to=> 'account#AddLikesToTweet', as: 'likeTweet'
+  
 
   
   

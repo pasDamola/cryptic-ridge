@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_27_105921) do
+ActiveRecord::Schema.define(version: 2020_04_02_172213) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 2020_02_27_105921) do
   end
 
   create_table "followers", force: :cascade do |t|
-    t.string "userId", null: false
-    t.string "followerId", null: false
+    t.string "userid", null: false
+    t.string "followerid", null: false
     t.integer "users_record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2020_02_27_105921) do
   end
 
   create_table "followings", force: :cascade do |t|
-    t.string "userId", null: false
-    t.string "followingId", null: false
+    t.string "userid", null: false
+    t.string "followingid", null: false
     t.integer "users_record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -54,29 +54,30 @@ ActiveRecord::Schema.define(version: 2020_02_27_105921) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.text "tweetInfo", null: false
-    t.string "userId", null: false
+    t.text "tweetinfo", null: false
+    t.string "userid", null: false
     t.integer "users_record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id", "users_record_id", "tweetInfo"], name: "tweets_list_index"
+    t.string "likes", default: "--- []\n"
+    t.index ["id", "users_record_id", "tweetinfo"], name: "tweets_list_index"
     t.index ["users_record_id"], name: "index_tweets_on_users_record_id"
   end
 
   create_table "users_records", force: :cascade do |t|
-    t.string "userFullName", null: false
-    t.string "userId", null: false
-    t.string "userName", null: false
-    t.string "userEmail", null: false
-    t.string "userPhone"
-    t.string "userBio"
-    t.string "userLocation"
-    t.string "userWebsite"
+    t.string "userfullname", null: false
+    t.string "userid", null: false
+    t.string "username", null: false
+    t.string "useremail", null: false
+    t.string "userphone"
+    t.string "userbio"
+    t.string "userlocation"
+    t.string "userwebsite"
     t.text "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "dob"
-    t.index ["userId", "userName", "userEmail"], name: "userd_record_list_index", unique: true
+    t.index ["userid", "username", "useremail"], name: "userd_record_list_index", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/updatePassword', :to=> 'account#updatePassword', as: 'updatePassword'
   get '/removeFollow', :to=> 'account#unfollowing', as: 'removeFollow'
   get '/viewTweet', :to=> 'account#loadTweets', as: 'viewTweet'
+  get '/allUsers', :to=> 'account#listAllUsers', as: 'allUsers'
 
   
   

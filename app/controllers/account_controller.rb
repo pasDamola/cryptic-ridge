@@ -198,6 +198,11 @@ class AccountController < ApplicationController
         end
     end
 
+    def listAllUsers
+        user = UsersRecord.all
+        render json: user.as_json, status: :ok
+    end
+
     # def UpdateResetPassword
     #     resetToken = params['resetToken']
     #     verifyPasswordResetToken(resetToken)

@@ -198,7 +198,6 @@ class AccountController < ApplicationController
             render json: {status:"error", code:404, message:"User Not Exist"}, status: :not_found
         end
     end
-
     def AddLikesToTweet
         user = Tweet.where("id = ?",params[:tweetId])
         if user.length > 0
@@ -216,10 +215,6 @@ class AccountController < ApplicationController
         user = UsersRecord.all
         render json: user.as_json, status: :ok
     end
-
-
-
-
     # def UpdateResetPassword
     #     resetToken = params['resetToken']
     #     verifyPasswordResetToken(resetToken)

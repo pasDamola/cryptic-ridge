@@ -178,6 +178,7 @@ class AccountController < ApplicationController
             eachTweet[:userFullName] = singleTweet.users_record.userfullname
             eachTweet[:userName] = singleTweet.users_record.username
             eachTweet[:dp] = (singleTweet.users_record.dp.attached?) ? url_for(singleTweet.users_record.dp) : ""
+            eachTweet[:likes] = singleTweet.users_record.likes.length
             tweetAll.push(eachTweet)
         end
         render json: tweetAll.as_json, status: :ok
@@ -198,21 +199,22 @@ class AccountController < ApplicationController
         end
     end
 
+    def AddLikesToTweet
+        user = Tweet.where("id = ?",params[:tweetId])
+        if user.length > 0
+            existingUsers = user[0].likes
+            if !(existingUsers.include? getUserId[0]['userId'])
+                existingUsers.push(getUserId[0]['userId'])
+                user[0].update_attribute(:likes, existingUsers)
+            end
+            render json: {updated:"Liked", totLike:existingUsers.length, user:user[0].as_json}, status: :ok
+        else
+            render json: {error:"No Tweet"}, status: :ok
+        end
+    end
     def listAllUsers
         user = UsersRecord.all
         render json: user.as_json, status: :ok
-    end
-
-    def AddLikesToTweet
-        user = Tweet.where("id = ? and ? = ANY (likes)",params[:tweetId], getUserId[0]['userId'])
-        if user.length <=0
-            existingUsers = user.likes.to_a
-            existingUsers.push(getUserId[0]['userId'])
-            user.update_attribute(:likes, existingUsers)
-            render json: {updated:"Updated"}, status: :ok
-        else
-            render json: {updated:"Existing"}, status: :ok
-        end
     end
 
 
